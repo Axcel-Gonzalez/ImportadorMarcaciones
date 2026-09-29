@@ -19,6 +19,8 @@ try
     if (!File.Exists(rutaEntrada))
         throw new FileNotFoundException("No se encontró el archivo CSV de entrada.", rutaEntrada);
 
+    CargarVariablesDesdeArchivo();
+
     var connectionString = ConstruirConnectionStringDesdeVariablesDeEntorno();
 
     await using var connection = new SqlConnection(connectionString);
@@ -105,4 +107,63 @@ static bool ObtenerBooleano(string nombre, bool valorPredeterminado)
     return bool.TryParse(valor, out var resultado)
         ? resultado
         : valorPredeterminado;
+}
+
+static void CargarVariablesDesdeArchivo()
+{
+    const string nombreVariableRuta = "IMPORTADOR_CONFIG_PATH";
+
+    var rutaArchivo = Environment.GetEnvironmentVariable(nombreVariableRuta);
+
+    if (string.IsNullOrWhiteSpace(rutaArchivo))
+    {
+        throw new InvalidOperationException(
+            $"Falta definir la variable de entorno {nombreVariableRuta}.");
+    }
+
+    rutaArchivo = Path.GetFullPath(rutaArchivo);
+
+    if (!File.Exists(rutaArchivo))
+    {
+        throw new FileNotFoundException(
+            "No se encontró el archivo de configuración indicado " +
+            $"por la variable {nombreVariableRuta}.",
+            rutaArchivo);
+    }
+
+    foreach (var lineaOriginal in File.ReadLines(rutaArchivo))
+    {
+        var linea = lineaOriginal.Trim();
+
+        // Ignorar líneas vacías
+        if (string.IsNullOrWhiteSpace(linea))
+            continue;
+
+        // Permitir comentarios
+        if (linea.StartsWith("#"))
+            continue;
+
+        var posicionIgual = linea.IndexOf('=');
+
+        if (posicionIgual <= 0)
+        {
+            throw new FormatException(
+                $"Línea inválida en archivo de configuración: {linea}");
+        }
+
+        var nombre = linea[..posicionIgual].Trim();
+        var valor = linea[(posicionIgual + 1)..].Trim();
+
+        if (string.IsNullOrWhiteSpace(nombre))
+        {
+            throw new FormatException(
+                "Se encontró una variable sin nombre " +
+                "en el archivo de configuración.");
+        }
+
+        Environment.SetEnvironmentVariable(
+            nombre,
+            valor,
+            EnvironmentVariableTarget.Process);
+    }
 }
