@@ -1,0 +1,8 @@
+DB_SERVER=(nombre servidor de BD)
+DB_DATABASE=(Nombre de BD EJ:ControlMarcaje)
+DB_USER=(nombre usuario en BD restringido)
+DB_PASSWORD=(contraseña del usuario de BD)
+(configuraciones de la conexion)
+DB_INTEGRATED_SECURITY=false
+DB_ENCRYPT=true
+DB_TRUST_SERVER_CERTIFICATE=true
