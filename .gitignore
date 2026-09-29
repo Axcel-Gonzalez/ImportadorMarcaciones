@@ -1,0 +1,7 @@
+bin/
+obj/
+.vs/
+*.user
+*.suo
+Data/rechazado.csv
+rechazado.csv
