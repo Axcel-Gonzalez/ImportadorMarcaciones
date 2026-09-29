@@ -1,0 +1,19 @@
+﻿numero_linea;rut;fecha_hora;tipo;origen;motivo
+2;12.345.678-5;2026-09-16 08:02:00;E;RELOJ;La marcación ya existe en la base de datos.
+3;12345678-5;2026-09-16 17:01:00;S;RELOJ;La marcación ya existe en la base de datos.
+4;9.876.543-3;2026-09-16 08:05:00;E;APP;La marcación ya existe en la base de datos.
+5;9.876.543-3;2026-09-16 17:00:00;S;APP;La marcación ya existe en la base de datos.
+6;15.678.234-3;2026-09-16 07:59:00;E;RELOJ;La marcación ya existe en la base de datos.
+7;15.678.234-3;2026-09-16 07:59:00;E;RELOJ;Marcación duplicada dentro del archivo CSV.
+8;11.223.344-K;2026-09-16 08:00:00;E;RELOJ;La marcación ya existe en la base de datos.
+9;11.223.344-K;2026-09-16 17:00:00;S;RELOJ;La marcación ya existe en la base de datos.
+10;17.890.123-0;2026-09-16 21:58:00;E;RELOJ;La marcación ya existe en la base de datos.
+11;13.579.246-2;2026-09-16 22:03:00;E;RELOJ;La marcación ya existe en la base de datos.
+12;12.345.678-1;2026-09-16 08:00:00;E;RELOJ;Dígito verificador incorrecto. Para el RUT informado corresponde 5.
+13;22.222.222-2;2026-09-16 08:00:00;E;RELOJ;El RUT 22222222-2 no existe en dbo.Trabajador.
+14;10.203.040-0;2026-09-16 08:00:00;E;RELOJ;El trabajador con RUT 10203040-0 está inactivo.
+15;14.141.414-3;2026-09-16 08:00:00;E;RELOJ;La marcación ya existe en la base de datos.
+16;12.345.678-5;2026-09-16 25:00:00;E;RELOJ;fecha_hora inválida. Se espera el formato yyyy-MM-dd HH:mm:ss.
+17;12.345.678-5;2026-09-16 12:00:00;X;RELOJ;tipo inválido. Solo se permite E (entrada) o S (salida).
+18;12.345.678-5;2026-09-15 07:58:00;E;RELOJ;La marcación ya existe en la base de datos.
+19;;2026-09-16 08:00:00;E;RELOJ;RUT vacío.
